@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing Board</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="box">
+        <div class="actions">
+            <button onclick="undo()">⬅️</button>
+            <button onclick="clearCanvas()">🗑️</button>
+        </div>
+        <div class="tools">
+            <div>
+                <button class="color-1" onclick="color1()"></button>
+                <button class="color-2" onclick="color2()"></button>
+                <button class="color-3" onclick="color3()"></button>
+            </div>
+        </div>
+        <div class="log">
+            <button onclick="dropDown()">Login</button>
+        </div>
+    </div>
+
+    <div class="dialog-box">
+        <div class="dialog-inputs">
+            <input type="text" placeholder="User ID" id="text"> <br>
+            <input type="password" id="password" placeholder="Password" id="password"> <br>
+            <input type="checkbox" onclick="myFunction()">Show Password
+        </div>
+        <div id="actions-panel">
+            <button onclick="login()" id="login">Login</button>
+            <button onclick="signup()" id="signup">Sign Up</button>
+        </div>
+    </div>
+
+    <canvas id="drawing-board" class="canvas"></canvas>
+</body>
+
+<script src="draw.js"></script>
+<script src="script.js"></script>
+
+</html>
