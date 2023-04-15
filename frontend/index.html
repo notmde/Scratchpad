@@ -6,43 +6,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drawing Board</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./assets/styles/style.css">
 </head>
 
-<body>
-    <div class="box">
-        <div class="actions">
-            <button onclick="undo()">⬅️</button>
-            <button onclick="clearCanvas()">🗑️</button>
-        </div>
-        <div class="tools">
-            <div>
-                <button class="color-1" onclick="color1()"></button>
-                <button class="color-2" onclick="color2()"></button>
-                <button class="color-3" onclick="color3()"></button>
-            </div>
-        </div>
-        <div class="log">
-            <button onclick="dropDown()">Login</button>
-        </div>
-    </div>
+<script src="./assets/scripts/script.js"></script>
+<script src="./assets/utils/draw.js"></script>
+<script src="./assets/utils/helper.js"></script>
+<script src="./assets/utils/authOps.js"></script>
 
-    <div class="dialog-box">
-        <div class="dialog-inputs">
-            <input type="text" placeholder="User ID" id="text"> <br>
-            <input type="password" id="password" placeholder="Password" id="password"> <br>
-            <input type="checkbox" onclick="myFunction()">Show Password
-        </div>
-        <div id="actions-panel">
-            <button onclick="login()" id="login">Login</button>
-            <button onclick="signup()" id="signup">Sign Up</button>
+<body>
+    <div class="flex-log">
+        <button class="log" onclick="dropDown()" id="login">Login</button>
+        <div class="box dialog-box">
+            <div class="dialog-inputs">
+                <input type="text" placeholder="User ID" id="text"> <br>
+                <input type="password" id="password" placeholder="Password" id="password"> <br>
+                <input type="checkbox" onclick="myFunction()">Show Password
+            </div>
+            <div id="actions-panel">
+                <button onclick="login()" id="login">Login</button>
+                <button onclick="signup()" id="signup">Sign Up</button>
+            </div>
         </div>
     </div>
 
     <canvas id="drawing-board" class="canvas"></canvas>
-</body>
 
-<script src="draw.js"></script>
-<script src="script.js"></script>
+    <div class="box-container">
+        <div class="box">
+            <div class="flex panel">
+                <button class="color-1" onclick="color1()"></button>
+                <button class="color-2" onclick="color2()"></button>
+                <button class="color-3" onclick="color3()"></button>
+            </div>
+            <div class="flex tools">
+                <button onclick="undo()">⬅️</button>
+                <button onclick="clearCanvas()">🗑️</button>
+            </div>
+        </div>
+    </div>
+
+</body>
 
 </html>

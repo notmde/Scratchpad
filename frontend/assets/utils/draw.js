@@ -73,19 +73,3 @@ function drawCreate(imageVal) {
 function store() {
     storeState.push(canvas.toDataURL())
 }
-
-window.addEventListener('DOMContentLoaded', () => {
-    canvas = document.getElementById("drawing-board")
-    ctx = canvas.getContext("2d")
-
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-
-    color3()
-
-    ctx.lineWidth = 1
-    ctx.lineCap = 'round'
-    ctx.shadowBlur = 1
-
-    update()
-});
