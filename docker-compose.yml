@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   mongo:
-    image: mongo
+    image: docker.io/library/mongo:latest
     volumes:
       - mongodb_data:/data/db
     environment:
