@@ -1,11 +1,11 @@
-FROM docker.io/library/golang:1.20
+FROM docker.io/library/golang:1.20 AS build-env
+WORKDIR /app
+COPY . /app
+RUN go mod tidy && go build -o backend .
 
-WORKDIR /usr/src/app
-
-COPY . .
-
-RUN go mod tidy
-
-RUN go build -o backend .
-
-CMD ["./backend"] 
+FROM alpine
+RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
+WORKDIR /app
+COPY --from=build-env /app/backend /app
+EXPOSE 8081
+ENTRYPOINT ./backend
