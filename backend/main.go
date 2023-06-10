@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/scratchpad-backend/api"
+	"github.com/scratchpad-backend/server"
 	"github.com/scratchpad-backend/storage"
 )
 
@@ -14,7 +14,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	server := api.NewServer(":8081", store)
-
-	server.Run()
+	s := server.NewServer(":8081", store)
+	s.Run()
 }
