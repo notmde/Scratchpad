@@ -31,8 +31,6 @@ func (s *Server) Run() {
 		login(c, s)
 	})
 	apiserver.POST("/api/logout", func(c *gin.Context) {
-		VerifyAuth(c, s)
-	}, func(c *gin.Context) {
 		logout(c, s)
 	})
 

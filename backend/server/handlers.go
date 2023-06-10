@@ -12,8 +12,6 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-//var SECRET_KEY = "123123"
-
 func signup(c *gin.Context, s *Server) {
 	c.Writer.Header().Set("content-type", "application/json")
 
@@ -88,7 +86,6 @@ func login(c *gin.Context, s *Server) {
 	})
 
 	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET_KEY")))
-	//tokenString, err := token.SignedString([]byte(SECRET_KEY))
 
 	if err != nil {
 		c.JSON(500, gin.H{"error": "cannot create tokenstring"})
@@ -108,6 +105,11 @@ func login(c *gin.Context, s *Server) {
 
 func logout(c *gin.Context, s *Server) {
 	c.Writer.Header().Set("content-type", "application/json")
+
+	if !VerifyAuth(c, s) {
+		return
+	}
+
 	body := new(types.User)
 
 	c.BindJSON(&body)

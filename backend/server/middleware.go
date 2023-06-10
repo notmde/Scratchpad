@@ -8,12 +8,12 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
-func VerifyAuth(c *gin.Context, s *Server) {
+func VerifyAuth(c *gin.Context, s *Server) bool {
 	tokenString, err := c.Cookie("authentication")
 
 	if err != nil {
 		c.JSON(401, gin.H{"error": "no token"})
-		return
+		return false
 	}
 
 	token, _ := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
@@ -23,28 +23,27 @@ func VerifyAuth(c *gin.Context, s *Server) {
 		}
 
 		return []byte(os.Getenv("SECRET_KEY")), nil
-		//return []byte(SECRET_KEY), nil
 	})
 
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 		if float64(time.Now().Unix()) > claims["exp"].(float64) {
 			c.JSON(401, gin.H{"error": "token expired"})
-			return
+			return false
 		}
 
 		err := s.store.IfIDExistsDB(claims["id"].(string))
 
 		if err != nil {
 			c.JSON(404, gin.H{"error": "id not found"})
-			return
+			return false
 		}
 
 	} else {
 		c.JSON(401, gin.H{"error": "invalid token"})
-		return
+		return false
 	}
 
-	c.Next()
+	return true
 }
 
 func CORSmanager(c *gin.Context) {
